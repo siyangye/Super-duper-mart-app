@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean for TennisCoach with constructor injection -->
+    <bean id="tennisCoach" class="com.example.coachapp.TennisCoach">
+        <constructor-arg>
+            <list>
+                <value>Monday schedule</value>
+                <value>Tuesday schedule</value>
+                <value>Wednesday schedule</value>
+                <value>Thursday schedule</value>
+                <value>Friday schedule</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- Bean for GolfCoach with setter injection -->
+    <bean id="golfCoach" class="com.example.coachapp.GolfCoach">
+        <property name="schedule" value="Golf Coach: Practice swings for 2 hours"/>
+    </bean>
+
+    <!-- Bean for FootballCoach with setter injection (Field injection not supported in XML) -->
+    <bean id="footballCoach" class="com.example.coachapp.FootballCoach">
+        <property name="schedule" value="Football Coach: Tackle practice for 3 hours"/>
+    </bean>
+
+    <!-- Bean for Player -->
+    <bean id="player" class="com.example.coachapp.Player">
+        <!-- Inject TennisCoach using constructor -->
+        <constructor-arg ref="tennisCoach"/>
+
+        <!-- Inject GolfCoach using setter -->
+        <property name="golfCoach" ref="golfCoach"/>
+
+        <!-- Inject FootballCoach using setter -->
+        <property name="footballCoach" ref="footballCoach"/>
+    </bean>
+
+</beans>
